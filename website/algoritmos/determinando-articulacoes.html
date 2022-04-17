@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<title>MAB368, Algoritmos e Grafos - Lista de Algoritmos</title>
+</head>
+<body bgcolor = "33ffca">
+<h1> MAB 368, Algoritmos e Grafos - 2019/2 </h1>
+<hr/>
+<h2> Determinando Articulações em um Grafo </h2>
+<h3> Descrição </h3>
+	<p>Uma articulação é um vértice que, se removido do grafo, aumenta o seu número de componentes conexas.</p>
+	<img src="../img/articulacoes.png" border = "2">
+	<figcaption>No grafo acima, os vértices 3, 4 e 7 são articulações</figcaption>
+
+<h3> A Ideia do Algoritmo </h3>
+<p>O algoritmo utiliza a árvore de profundidade obtida através da busca. Considerando a imagem anterior, teríamos a seguinte ABP, considerando que r = 1:</p>
+	<img src="../img/articulacoes_abp.png" border = "2">
+	<br/>
+	<li>Define-se <b>lowpt(v)</b> como o vértice mais próximo da raíz obtido através de um caminho descendente em T tomado a partir de v, passando por no máximo uma aresta de retorno. Para o grafo do nosso exemplo, teríamos a seguinte classificação do lowpt de cada vértice:</li>
+		<table border = "1">
+	  <tr>
+	  	<th>v</th>
+	    <th> &nbsp;1&nbsp;</th>
+	    <th> &nbsp;2&nbsp;</th>
+	    <th> &nbsp;3&nbsp;</th>
+	    <th> &nbsp;4&nbsp;</th>
+	    <th> &nbsp;5&nbsp;</th>
+	    <th> &nbsp;6&nbsp;</th>
+	    <th> &nbsp;7&nbsp;</th>
+	    <th> &nbsp;8&nbsp;</th>
+	    <th> &nbsp;9&nbsp;</th>
+	    <th>10</th>
+	  </tr>
+	  <tr>
+	    <td>lowpt(v)</td>
+	    <td> &nbsp;1&nbsp;</td>
+	    <td> &nbsp;1&nbsp;</td>
+	    <td> &nbsp;1&nbsp;</td>
+	    <td> &nbsp;4&nbsp;</td>
+	    <td> &nbsp;4&nbsp;</td>
+	    <td> &nbsp;4&nbsp;</td>
+	    <td> &nbsp;4&nbsp;</td>
+	    <td> &nbsp;7&nbsp;</td>
+	    <td> &nbsp;7&nbsp;</td>
+	    <td> &nbsp;7&nbsp;</td>
+	  </tr>
+	</table>
+
+</ul>
+<p>Temos o seguinte teorema:</p>
+<p>Seja G(V, E) um grafo conexo e T uma árvore de profundidade de G. Um vértice v pertencente a V(G) é uma articulação se e somente se:</p>
+<ul>
+  <li>v é a raíz de T e possui mais de um filho ou</li>
+  <li>v não é raíz de T e é pai de pelo menos um demarcador.</li>
+</ul>
+
+<h3> Algoritmo: DFS_Determinando_Articulacoes </h3>
+<p><b>Observação:</b> O algoritmo é uma extensão da busca em profundidade.
+											Em negrito, estão as novas alterações que estamos fazendo com a finalidade de obter novas informações sobre o grafo.<br/>
+											Observe também as adições a VISITE1 e VISITE2.</p>
+<p>Consideramos ainda que:
+	<ul>
+		<li> φ(v) = número de filhos de v</li>
+		<li> isDemarcador(v) = guarda se o vértice é demarcador</li>
+		<li> isArticulacao(v) = guarda se o vértice v é articulação</li>
+	</ul>
+</p>
+<b> Entrada: Grafo G = (V, E) conexo e raíz de busca r ∈ V(G) </b><br/>
+<b> Saída: Listagem de todas as arestas de G </b><br/>
+<ol>
+	<li>tempo_entrada ← 0</li>
+	<li>tempo_saida ← 0</li>
+	<li>Para todo v ∈ V(G), faça:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;c(v) ← 0</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;<b>lowpt(v) ← v</b></li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;<b>φ(v) ← 0</b></li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;<b>isDemarcador(v) ← FALSE</b></li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;<b>isArticulacao(v) ← FALSE</b></li>
+	<li>c(r) ← 1</li>
+	<li>nível(r) ← 0</li>
+	<li>PE(r) ← tempo_entrada</li>
+	<li>π(r) ← r</li>
+	<li>P ← {r}</li>
+	<li>Enquanto P ≠ ∅, faça:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;Seja v ∈ P</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;se existe w ∈ Adj(v) com vw não visitada:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;se c(v) = 0, então:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c(w) ← 1</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tempo_entrada ← tempo_entrada +1</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PE(w) ← tempo_entrada</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P ← P ∪ {w}</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VISITE1(vw)</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;senão, <b>VISITE2(vw)</b></li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;senão:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c(v) ← 2</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Para cada w em Adj(v):</b></li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>se π(w) = v e nível(lowpt(w)) < nível(lowpt(v)), então: lowpt(v) ← lowpt(w)</b></li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>se v ≠ raíz e lowpt(v) = v ou lowpt(v) = π(v):</b></li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>isDemarcador(v) ← TRUE</b></li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>se π(v) ≠ raíz e isDemarcador(v) = TRUE, isArticulacao(π(v)) ← TRUE</b></li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tempo_saida ← tempo_saida + 1</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PS(v) ← tempo_saida</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P ← P \ {v}</li>
+	<li><b>se φ(r) > 1, isArticulacao(r) ← TRUE</b></li>
+</ol>
+
+<br/>
+<b>VISITE1:</b> (Visita aresta de árvore)
+<ol>
+	<li><b>φ(v) ← φ(v) + 1</b></li>
+	<li>π(w) ← v</li>
+	<li>nível(w) ← nível(v) + 1</li>
+	<li>vw ← Aresta de Árvore</li>
+</ol>
+
+<br/>
+<b>VISITE2:</b> (Visita aresta não de árvore = fronde)
+<ol>
+	<li>vw ← Fronde</li>
+	<li><b>se π(v) ≠ w, então:</b></li>
+	<li><b>&nbsp;&nbsp;&nbsp;&nbsp;se nível(lowpt(v)) > nível(w):</b></li>
+	<li><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lowpt(v) ← w</b></li>
+</ol>
+
+<h3>Complexidade</h3>
+<b>Complexidade de Espaço:</b> O(n+m) <br/>
+<b>Complexidade de Tempo:</b> O(n+m)<br/><br/>
+</body>
+<hr/>
+<a href="javascript:history.back()"><img src="../img/back_arrow.png" alt="back_arrow.png">  Voltar</a>

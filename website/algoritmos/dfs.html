@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<title>MAB368, Algoritmos e Grafos - Lista de Algoritmos</title>
+</head>
+<body bgcolor = "33ffca">
+<h1> MAB 368, Algoritmos e Grafos - 2019/2 </h1>
+<hr/>
+<h2> Busca em Profundidade (DFS) </h2>
+<h3> Descrição </h3>
+	<p>Na busca em profundidade, iteramos pelo grafo sempre procurando ir o mais longe o possível. Quando não resta mais um caminho não visitado, voltamos ao vértice ancestral que havia uma bifurcação.</p>
+
+	<img src="../img/depth_first_search.gif" border = "2" height = "400" width = "400">
+	<figcaption>Imagem retirada de <a href="https://codeforces.com/blog/entry/68138?locale=en">https://codeforces.com/blog/entry/68138?locale=en</a>
+
+	<p>Utilizamos uma Pilha P para guardar os vértices visitados.</p>
+	<p>Tal como na Busca em Largura, obtemos uma Árvore de Busca, e as seguintes informações podem ser definidas durante a iteração:</p>
+
+	<ul>
+		<li><b>P - Pilha:</b> utilizada para guardar os vértices marcados.</li>
+		<li><b>PE(v)</b> Ordem em que v entra em P.</li>
+		<li><b>PS(v)</b> Ordem em que v sai de P.</li>
+		<li><b>π(v) = p :</b> Vértice que marca v = pai de v na árvore de busca.</li>
+	</ul>
+
+<h3> Algoritmo: DFS </h3>
+<p><b>Observação:</b> O algoritmo é uma extensão da busca geral em grafos.
+											Em negrito, estão as novas alterações que estamos fazendo com a finalidade de obter novas informações sobre o grafo.<br/>
+											Observe também as adições a VISITE1 e VISITE2.</p>
+</p>
+<b> Entrada: Grafo G = (V, E) conexo e raíz de busca r ∈ V(G) </b><br/>
+<b> Saída: Listagem de todas as arestas de G </b><br/>
+<ol>
+	<li><b>tempo_entrada ← 0</b></li>
+	<li><b>tempo_saida ← 0</b></li>
+	<li>Para todo v ∈ V(G)\{r}, faça:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;c(v) ← 0</li>
+	<li>c(r) ← 1</li>
+	<li>nível(r) ← 0</li>
+	<li><b>PE(r) ← tempo_entrada</b></li>
+	<li><b>π(r) ← r</b></li>
+	<li>P ← {r}</li>
+	<li>Enquanto P ≠ ∅, faça:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;Seja v ∈ P</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;se existe w ∈ Adj(v) com vw não visitada:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;se c(v) = 0, então:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c(w) ← 1</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>tempo_entrada ← tempo_entrada +1</b></li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>PE(w) ← tempo_entrada</b></li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P ← P ∪ {w}</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>VISITE1(vw)</b></li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;senão, <b>VISITE2(vw)</b></li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;senão:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c(v) ← 2</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>tempo_saida ← tempo_saida + 1</b></li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>PS(v) ← tempo_saida</b></li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>P ← P \ {v}</b></li>
+</ol>
+
+<b>VISITE1:</b> (Visita aresta de árvore)
+<ol>
+	<li>π(w) ← v</li>
+	<li>nível(w) ← nível(v) + 1</li>
+	<li>vw ← Aresta de Árvore</li>
+</ol>
+
+<b>VISITE2:</b> (Visita aresta não de árvore = fronde)
+<ol>
+	<li>vw ← Fronde</li>
+</ol>
+
+
+<h3>Complexidade</h3>
+<b>Complexidade de Espaço:</b> O(n+m) <br/>
+<b>Complexidade de Tempo:</b> O(n+m)<br/><br/>
+
+</body>
+<hr/>
+<a href="javascript:history.back()"><img src="../img/back_arrow.png" alt="back_arrow.png">  Voltar</a>

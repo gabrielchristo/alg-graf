@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<title>MAB368, Algoritmos e Grafos - Lista de Algoritmos</title>
+</head>
+<body bgcolor = "33ffca">
+<h1> MAB 368, Algoritmos e Grafos - 2019/2 </h1>
+<hr/>
+<h2> Algoritmo de Dijkstra </h2>
+<h3> Descrição </h3>
+	<p>O algoritmo de dijkstra tem como função encontrar o menor caminho de um vértice r a todos outros vértices de um grafo ponderado de pesos não negativos.</p>
+
+<h3> A Ideia do Algoritmo </h3>
+<p>O algoritmo possui uma ideia gulosa e funciona de maneira semelhante ao algoritmo de Prim. Sempre fazemos a escolha localmente ótima, iterativamente.</p>
+<p>A ideia é utilizar como base um conjunto V' que conterá os vértices do caminho mínimo, atualizados a cada iteração do algoritmo, até obtermos V' = V(G).</p>
+<p>Definimos que a distância de um vértice até ele mesmo é 0, e que a distância de um vértice até outro não alcançável é igual a +∞.</p>
+<p>Denotamos como d(v) a distância da raíz de busca r até o vértice v, e p(v, w) como o peso da aresta vw.</p>
+<p>Assim, temos que no início V' = {r}, d(r) = 0 e d(v) = p(r, v)</p>
+<p>Em seguida, escolhemos o vértice w pertencente a V\V' tal que d(w) é mínimo e o adicionamos a V'</p>
+<p>Assim, atualizamos os valores das distâncias ao iterar por V - V' com um vértice v:</p>
+<br\><p><b>d(v) = min{d(v), d(w) + p(w, v)}</b></p>
+
+
+<h3> Algoritmo: Dijkstra </h3>
+<b> Entrada:</b> Grafo ponderado G(V, E) com pesos não negativos, raíz r <br/>
+<b> Saída: </b> Vetor de distâncias d. <br/>
+<ol>
+	<li>V' = {r}</li>
+	<li>d(r) = 0</li>
+	<li>Para todo v ∈ V - V':</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;d(v) = p(r, v)</li>
+	<li>Enquanto V' ≠ V:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;Escolher w ∈ V - V' que minimiza o valor d(w)</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;V' = V' ∪ {w}</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;Para v ∈ V - V':</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d(v) = min{d(v), d(w) + p(wv)}
+</ol>
+
+
+<h3>Complexidade de Tempo</h3>
+
+<p>É válido observar que a complexidade deste algoritmo está completamente relacionada à estrutura de dados utilizada durante a implementação.</p>
+
+<p>Utilizando um array: O(n²)<br/>
+	Utilizando uma Heap Binária de Mínimo: O((m + n) log(n))<br/>
+	Utilizando uma Heap de Fibonacci: O(m + n log(n))<br/></p>
+
+</body>
+<hr/>
+<a href="javascript:history.back()"><img src="../img/back_arrow.png" alt="back_arrow.png">  Voltar</a>

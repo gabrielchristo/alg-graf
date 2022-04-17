@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<title>MAB368, Algoritmos e Grafos - Lista de Algoritmos</title>
+</head>
+<body bgcolor = "33ffca">
+<h1> MAB 368, Algoritmos e Grafos - 2019/2 </h1>
+<hr/>
+<h2> Busca Geral em Grafos </h2>
+<h3> Descrição </h3>
+	<p>A busca geral é um procedimento que percorre o grafo, visitando cada vértice e cada aresta num número constante de vezes.<br/>
+		 A saída de um algoritmo de busca é a lista das arestas de adj(G), sem repetições.</p>
+
+<h3> A Ideia do Algoritmo </h3>
+<p>A ideia do algoritmo consiste em manter uma classificação de seus vértices:</p>
+<p><b>Explorados:</b> Todas arestas de Adj(v) já foram visitadas. c(v) = 2.<br/>
+	<b>Marcados/Visitados:</b> Alguma aresta de Adj(v) foi visitada. c(v) = 1.<br/>
+	<b>Não marcado/não visitado</b> Nenhuma aresta de Adj(v) foi visitada. c(v) = 0.</p>
+
+<p>Além disso, mantemos uma estrutura M para guardar todos os vértices marcados.</p>
+<p>Posteriormente, veremos que:</p>
+<ul>
+	<li>Se M é Pilha: Busca em Profundidade</li>
+	<li>Se M é Fila: Busca em Largura</li>
+</ul>
+
+<h3> Algoritmo: Busca_Geral </h3>
+<b> Entrada: Grafo G = (V, E) conexo e raíz de busca r ∈ V(G) </b><br/>
+<b> Saída: Listagem de todas as arestas de G </b><br/>
+<ol>
+	<li>Para todo v ∈ V(G)\{r}, faça:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;c(v) ← 0</li>
+	<li>c(r) ← 1</li>
+	<li>M ← {r}</li>
+	<li>Enquanto M ≠ ∅, faça:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;Seja v ∈ M</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;se existe w ∈ Adj(v) com vw não visitada:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;se c(v) = 0, então:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c(w) ← 1</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;M ← M ∪ {w}</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VISITE1(vw)</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;senão, VISITE2(vw)</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;senão:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c(v) ← 2</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;M ← M \ {v}</li>
+</ol>
+
+
+<h3>Complexidade</h3>
+<b>Complexidade de Espaço:</b> O(n+m) <br/>
+<b>Complexidade de Tempo:</b> O(n+m)<br/><br/>
+
+</body>
+<hr/>
+<a href="javascript:history.back()"><img src="../img/back_arrow.png" alt="back_arrow.png">  Voltar</a>

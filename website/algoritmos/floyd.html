@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<title>MAB368, Algoritmos e Grafos - Lista de Algoritmos</title>
+</head>
+<body bgcolor = "33ffca">
+<h1> MAB 368, Algoritmos e Grafos - 2019/2 </h1>
+<hr/>
+<h2> Algoritmo de Floyd </h2>
+<h3> Descrição </h3>
+	<p> O Algoritmo de Floyd tem como finalidade resolver um problema de caminho mínimo, em que deseja-se descobrir o menor caminho de um vértice u até v, para todo u,v ∈ V(G). </p>
+
+<h3> A Ideia do Algoritmo </h3>
+<p> O algotimo utiliza programação dinâmica. </p>
+<p> Considere P<sup>k</sup><sub>i, j</sub> como o tamanho do menor caminho do vértice i ao vértice j, permitindo somente os vértices em {1, 2, ..., k} como vértices intermediários no caminho.
+<br/> Queremos: P<sup>n</sup><sub>i, j</sub> ∀ i, j</p>
+
+<p><b>Condições Iniciais:</b></p>
+<img src="../img/floyd_latex0.png" border="2"/>
+
+<p><b>Relação de Recorrência:</b></p>
+<img src="../img/floyd_latex1.png" border="2"/>
+
+<h3> Algoritmo: Floyd</h3>
+<b> Entrada: </b> Grafo G = (V, E) e p:E(G) → Q<br/>
+<b> Saída: </b> matriz P<sup>n</sup> quadrada de ordem n, onde P<sup>n</sup><sub>i, j</sub> tem o valor do caminho mínimo de i a j<br/>
+<ol>
+	<li>Construir P<sup>0</sup></li>
+	<li>Para k ← 1 até n:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;Para i ← 1 até n:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Para j ← 1 até n:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P<sup>k</sup><sub>ij</sub> ← min {P<sup>k-1</sup><sub>ij</sub> , P<sup>k-1</sup><sub>ik</sub> + P<sup>k-1</sup><sub>kj</sub>}</li>
+</ol>
+
+<h3>Para recuperar os caminhos mínimos</h3>
+<p>Considere π<sup>k</sup><sub>ij</sub> como o vértice imediatamente anterior a v<sub>j</sub> no caminho corrente de v<sub>i</sub> a v<sub>j</sub>.</p>
+<p><b> No início: </b></p>
+<img src="../img/floyd_latex2.png" border="2"/>
+<p><b> Se P<sup>k-1</sup><sub>ij</sub> > P<sup>k-1</sup><sub>ik</sub> + P<sup>k-1</sup><sub>kj</sub>: </b></p>
+P<sup>k-1</sup><sub>ij</sub> ← P<sup>k-1</sup><sub>ik</sub> + P<sup>k-1</sup><sub>kj</sub><br/>
+π<sup>k-1</sup><sub>ij</sub> ← π<sup>k-1</sup><sub>ik</sub><br/>
+
+
+
+<h3>Complexidade</h3>
+<b>Complexidade de Espaço:</b> O(n<sup>2</sup>). Apesar de gerarmos n tabelas de tamanho n², não é necessário guardar as matrizes anteriores a cada iteração.<br/>
+<b>Complexidade de Tempo:</b> O(n<sup>3</sup>). O Tamanho da tabela é O(n<sup>3</sup>) e o cálculo de cada elemento é O(1).<br/>
+
+</body>
+<hr/>
+<a href="javascript:history.back()"><img src="../img/back_arrow.png" alt="back_arrow.png">  Voltar</a>

@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<title>MAB368, Algoritmos e Grafos - Lista de Algoritmos</title>
+</head>
+<body bgcolor = "33ffca">
+<h1> MAB 368, Algoritmos e Grafos - 2019/2 </h1>
+<hr/>
+<h2> Problema da Maior Subsequência Comum </h2>
+<h3> Descrição </h3>
+	<p> Dadas as sequências X = {x₁, x₂, x₃...}, Y = {y₁, y₂, y₃...} no mesmo alfabeto, desejamos encontrar a maior subsequência comum a X e Y, denotada por Z.
+	<br/> Os elementos não precisam estar consecutivos, mas é importante que tenham a mesma ordem. </p>
+	<b> Exemplo: </b><br/>
+	X = a <b>a b c</b> b <b>a</b> c d <br/>
+	Y = <b>a</b> d <b>b c a</b> <br/>
+	Z = <b> a b c a </b>
+
+<h3> A Ideia do Algoritmo </h3>
+<p> A ideia deste algoritmo utiliza programação dinâmica.
+<p> Considere os prefixos xᵢ = x₁x₂x₃...xᵢ yⱼ = y₁y₂y₃...yⱼ </p>
+<p>x₀ = ε <br/>x₁ = x₁ <br/>x₂ = x₁x₂</p>
+<p> Considere Mᵢⱼ = Tamanho da maior subsequência comum entre xᵢ e yⱼ.
+<p>M₀ⱼ = 0 <br/>Mᵢ₀ = 0 <br/> M₁₁ = {1, se x₁ = y₁ | 0, se x₁ ≠ y₁}<br/>
+<p>Queremos determinar Mₘₙ, para encontrá-lo, construimos a tabela da seguinte forma:<br/><br/>
+<img src="../img/MSC_latex.png" border="2"/>
+
+<h3> Algoritmo: MSC </h3>
+<b> Entrada: </b>Subsequências X e Y<br/>
+<b> Saída: </b>Z = {z₁, z₂, z₃, ...,zₖ}, onde Mₘₙ = k<br/>
+<ol>
+	<li>Para i ← 0 até m, Mᵢ₀ ← 0</li>
+	<li>Para j ← 0 até n, M₀ⱼ ← 0</li>
+	<li>Para i ← 1 até m:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp; Para j ← 1 até n:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Se xᵢ = yⱼ, Mᵢⱼ ← Mᵢ₋₁ⱼ₋₁+1</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Senão, se Mᵢ₋₁ⱼ > Mᵢⱼ₋₁:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Mᵢⱼ ← Mᵢ-₁ⱼ</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Senão, Mᵢⱼ ← Mᵢⱼ-₁</li>
+</ol>
+<p> Para recuperar o Z, podemos adicionar às linhas:</p>
+5. Bᵢⱼ ← "↖"</br>
+7. Bᵢⱼ ← "↑"</br>
+8. Bᵢⱼ ← "←"</br>
+
+<h3>Complexidade</h3>
+<b>Complexidade de Espaço:</b> O(mn) <br/>
+<b>Complexidade de Tempo:</b> O(mn)<br/><br/>
+A complexidade de tempo é dada pelo tamanho da tabela, já que a computação de cada posição é O(1)
+
+
+</body>
+<hr/>
+<a href="javascript:history.back()"><img src="../img/back_arrow.png" alt="back_arrow.png">  Voltar</a>

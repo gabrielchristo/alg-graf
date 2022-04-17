@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<title>MAB368, Algoritmos e Grafos - Lista de Algoritmos</title>
+</head>
+<body bgcolor = "33ffca">
+<h1> MAB 368, Algoritmos e Grafos - 2019/2 </h1>
+<hr/>
+<h2> Reconhecimento de Grafos Bipartidos </h2>
+<h3> Descrição </h3>
+	<p>Um grafo G é bipartido se existem conjuntos de vértices X e Y tais que X ∪ Y = V(G), X ∩ Y = ∅ tal que, seja uv ∈ E(G), u ∈ X e v ∈ Y.</p>
+	<p>Ou seja, cada aresta de u a v, conecta os vértices em dois conjuntos distintos.</p>
+
+	<img src="../img/bipartite.png", border = "2">
+
+<h3> A Ideia do Algoritmo </h3>
+<p>A ideia do algoritmo é baseada no seguinte teorema:</p>
+<p><b>G é bipartido se, e somente se G não tem ciclo ímpar</b></p>
+<p>Dessa maneira, podemos fazer uma busca profundidade com a finalidade de definir a árvore de busca em largura T de G.</p>
+<p>Se T possui uma aresta primo ou irmão, então G tem ciclo ímpar, pois cada uma delas forma um ciclo ímpar com os caminhos de seus extremos até o seu ancestral comum em T.</p>
+<p>Se não encontrar alguma dessas arestas, então os níveis ímpares de T contém os vértices X, e os pares, Y</p>
+
+<h3> Algoritmo: Reconhecimento_de_Grafo_Bipartido </h3>
+<b> Entrada: Grafo G(V, E) </b><br/>
+<b> Saída: X e Y, se bipartido </b><br/>
+<ol>
+	<li>Faça uma Busca em Largura em G, obtendo a árvore T e a classificação das frondes.</li>
+	<li>Se apareceu alguma aresta primo ou irmão, então G não é bipartido</li>
+	<li>Senão, considere:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;X = {v | nível(v) em T é par}</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;Y = {v | nível(v) em T é ímpar}</li>
+</ol>
+
+
+<h3>Complexidade</h3>
+<b>Complexidade de Espaço:</b> O(n+m) <br/>
+<b>Complexidade de Tempo:</b> O(n+m)<br/><br/>
+
+</body>
+<hr/>
+<a href="javascript:history.back()"><img src="../img/back_arrow.png" alt="back_arrow.png">  Voltar</a>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<title>MAB368, Algoritmos e Grafos - Lista de Algoritmos</title>
+</head>
+<body bgcolor = "33ffca">
+<h1> MAB 368, Algoritmos e Grafos - 2019/2 </h1>
+<hr/>
+<h2> Ordenação Topológica </h2>
+<h3> Descrição </h3>
+	<p>Dado um digrafo, queremos encontrar uma permutação de seus vértices, tal que se uv ∈ E(G), então u vem antes de V na permutação</p>
+
+	<img src="../img/ot.png" border = "2" width = "600" height = "220">
+	<figcaption>Um grafo e uma possível ordenação topológica</figcaption>
+
+<h3> A Ideia do Algoritmo </h3>
+<p>A ideia do algoritmo é baseada no teorema provado em sala de aula:</p>
+<p><b>G tem uma Ordenação Topológica se, e somente se G não tem ciclo</b></p>
+
+<h3> Algoritmo: Ordenacao_Topologica </h3>
+<b> Entrada: Digrafo Acíclico G = (V, E).</b><br/>
+<b> Saída: v<sub>1</sub>v<sub>2</sub>v<sub>3</sub>...v<sub>n</sub>, uma OT de G. </b><br/>
+<ol>
+	<li>g ← Grau_de_Entrada(G)</li>
+	<li>F ← ∅</li>
+	<li>Para cada v ∈ V(G):</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;se g(v) = 0, então F ← F ∪ {v}</li>
+	<li>Para i ← 1 até n:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;Seja f ∈ F, F ← F\{f}</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;v<sub>i</sub> ← f</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;Para cada w ∈ Adj+(f):</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g(w) ← g(w) - 1</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;se g(w) = 0, então:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;F ← F ∪ {w}</li>
+
+</ol>
+
+
+<h3>Complexidade</h3>
+<b>Complexidade de Espaço:</b> O(n+m) <br/>
+<b>Complexidade de Tempo:</b> O(n+m)<br/><br/>
+
+</body>
+<hr/>
+<a href="javascript:history.back()"><img src="../img/back_arrow.png" alt="back_arrow.png">  Voltar</a>

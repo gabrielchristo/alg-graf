@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<title>MAB368, Algoritmos e Grafos - Lista de Algoritmos</title>
+</head>
+<body bgcolor = "33ffca">
+<h1> MAB 368, Algoritmos e Grafos - 2019/2 </h1>
+<hr/>
+<h2> Árvore Geradora Mínima (Prim) </h2>
+<h3> Descrição </h3>
+	<p>Tal como o Algoritmo de Kruskal, Prim tem como propósito determinar uma Árvore Geradora Mínima de um dado grafo</p>
+
+<h3> A Ideia do Algoritmo </h3>
+<p>A ideia do algoritmo é manter uma estrutura S que guarda os vértices já incluidos na AGM</p>
+<p>O algoritmo funciona com o método guloso. Temos:</p>
+
+<p><b>Critério α:</b> Considerar a aresta de menor peso primeiro, entre as que ligam a parte conexa e outros vértices do grafo.</b><br/>
+<b>Propriedade P:</b> Manter conexo.</p>
+
+<p>Com a finalidade de resolver a escolha de cada aresta de menor peso a cada iteração e manter a estrutura necessária para fazer isso eficientemente, utlizamos uma Fila de Prioridades Q.<br/>
+	 Denotamos V(G) = V, durante a enumeração dos passos do algoritmo.<br/>
+	 S é o conjunto de vértices visitados, e V\S, contém vértices não visitados.</p>
+
+	 <h3> Algoritmo: Prim </h3>
+	 <b> Entrada: </b> Grafo conexo ponderado G = (V, E), p.E(G) → Q+ <br/>
+	 <b> Saída: </b> T ⊂ E(G), tal que suas arestas correspondem à AGMínima de G <br/>
+	 <ol>
+	 	<li>T ← ∅</li>
+	 	<li>S ← { 1 };</li>
+	 	<li>Enquanto S ≠ V:</li>
+	 	<li>&nbsp;&nbsp;&nbsp;&nbsp;Escolher (v, w) de menor custo, tal que v ∈ V\S e w ∈ S</li>
+	 	<li>&nbsp;&nbsp;&nbsp;&nbsp;T = T ∪ {(v, w)}</li>
+	 	<li>&nbsp;&nbsp;&nbsp;&nbsp;S = S ∪ {v}</li>
+	 </ol>
+
+
+<h3>Complexidade</h3>
+<p>Tal como no algoritmo de Dijkstra, a complexidade de Prim depende da implementação para escolher (v, w) de menor custo.<br/>
+	Utilizando diferentes estruturas de dados, podemos obter complexidade de tempo diferentes:</p>
+<p>
+	<b>Utilizando busca na matriz de adjacência:</b> O(n²)<br/>
+	<b>Utilizando Heap Binária:</b> O(m log n)<br/>
+	<b>Utliizando Heap de Fibonacci:</b> O(m + n log n)
+</p>
+
+<h3>Execução de Prim</h3>
+
+<img src="../img/prim.png" border="2">
+<p>Imagem retirada de <a href="https://stackoverflow.com/questions/1195872/when-should-i-use-kruskal-as-opposed-to-prim-and-vice-versa">https://stackoverflow.com/questions/1195872/when-should-i-use-kruskal-as-opposed-to-prim-and-vice-versa</a> </p>
+
+</body>
+<hr/>
+<a href="javascript:history.back()"><img src="../img/back_arrow.png" alt="back_arrow.png">  Voltar</a>

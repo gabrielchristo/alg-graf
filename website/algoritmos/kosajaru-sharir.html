@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<title>MAB368, Algoritmos e Grafos - Lista de Algoritmos</title>
+</head>
+<body bgcolor = "33ffca">
+<h1> MAB 368, Algoritmos e Grafos - 2019/2 </h1>
+<hr/>
+<h2> Determinando Componentes Fortemente Conexas (Kosajaru Sharir) </h2>
+<h3> Descrição </h3>
+	<p>Uma componente fortemente conexa de um digrafo G é um subgrafo maximal fortemente conexo de de G.</b>
+	<p>Dizemos que um digrafo G é fortemente conexo quando para qualquer par de vértices u, v ∈ V(G) existe um caminho de u a v.</p>
+
+<h3> A Ideia do Algoritmo </h3>
+<p>Definimos G<sub>t</sub> como o grafo transposto de G, em que para toda aresta uv ∈ E(G), vu ∈ E(G<sub>t</sub>).</p>
+<p>A ideia do algoritmo é baseada no seguinte teorema:</p>
+<p><b>G e G<sub>t</sub> possuem as mesmas componentes fortemente conexas</b></p>
+
+<h3> Algoritmo: Kosaraju-Sharir </h3>
+<b> Entrada: Digrafo G </b><br/>
+<b> Saída: componentes fortemente conexas de G, isto é, os vértices de cada árvore da BP(G<sub>t</sub>) </b><br/>
+
+<ol>
+	<li>Faça uma Busca em Profundidade em G, determinando a ordem de saída PS</li>
+	<li>Determine G<sub>t</sub></li>
+	<li>Faça uma Busca em Profundidade em G<sub>t</sub> escolhendo como raíz a cada vez, o vértice ainda não explorado com maior PS.</li>
+</ol>
+
+As árvores dessa busca definem as componentes fortemente conexas de G.
+
+<h3>Complexidade</h3>
+<b>Complexidade de Espaço:</b> O(n+m) <br/>
+<b>Complexidade de Tempo:</b> O(n+m)<br/><br/>
+
+</body>
+<hr/>
+<a href="javascript:history.back()"><img src="../img/back_arrow.png" alt="back_arrow.png">  Voltar</a>

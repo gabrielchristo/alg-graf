@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<title>MAB368, Algoritmos e Grafos - Lista de Algoritmos</title>
+</head>
+<body bgcolor = "33ffca">
+<h1> MAB 368, Algoritmos e Grafos - 2019/2 </h1>
+<hr/>
+<h2> Algoritmo de Zykov para determinar o Número Cromático de um Grafo</h2>
+<h3> Descrição </h3>
+	<p>Dado o grafo simples G = (V,E) não direcionado, queremos encontrar o <b>número cromático</b> de G, denotado por Χ(G).</p>
+	<p>
+		O problema da coloração de vértices é NP-completo, e o método de Zykov proporciona uma solução exponencial.
+	</p>
+	
+<h3> A Ideia do Algoritmo </h3>
+<p> Zykov é um algoritmo de alteração estrutural. Utilizamos:</p>
+<p><b>Adição de Arestas</b> (detonado por G + uv, sendo G um grafo e uv uma aresta):
+
+
+
+<p><b>Aglutinação de Vértices não Adjacentes</b> (denotado por G<sub>uv</sub>):
+
+
+
+
+<h3> Algoritmo: Zykov </h3>
+<p> Denotamos por K<sub>n</sub> como o grafo completo de n vértices. </p>
+<b> Entrada: Grafo G conexo </b><br/>
+<b> Saída: Χ(G) </b><br/>
+<ol>
+	<li>Se G = K<sub>n</sub>, então Χ(G) ← n</li>
+	<li>senão:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;sejam u, v tal que uv ∉ E(G) </li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;Χ(G) ← min{Χ(G<sub>uv</sub> , Χ(G + uv)}</li>
+</ol>
+
+
+<h3> Execução do Algoritmo</h3>
+<img src = "../img/zykov.png" border = "2">
+
+</body>
+<hr/>
+<a href="javascript:history.back()"><img src="../img/back_arrow.png" alt="back_arrow.png">  Voltar</a>

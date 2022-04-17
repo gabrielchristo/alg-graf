@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<title>MAB368, Algoritmos e Grafos - Lista de Algoritmos</title>
+</head>
+<body bgcolor = "33ffca">
+<h1> MAB 368, Algoritmos e Grafos - 2019/2 </h1>
+<hr/>
+<h2> Problema da Seleção de Atividades </h2>
+<h3> Descrição </h3>
+	<p>O problema da seleção de atividades é um problema de otimização combinatória que tem como objetivo
+		enontrar o maior onjunto de atividades mutuamente compatíveis.</p>
+	<p>
+		Dada uma lista de <b>n atividades</b>, temos, para cada atividade i:<br/>
+		<b>s<sub>i</sub>:</b> O seu tempo de início <br/>
+		<b>t<sub>i</sub>:</b> O seu tempo de término <br/>
+	<p>
+
+<h3> A Ideia do Algoritmo </h3>
+<p> O algoritmo é resolvido através de uma estratégia gulosa. Temos: </p>
+<p><b>Critério α:</b> Escolher as atividades que terminam primeiro.</b><br/>
+<b>Propriedade P:</b> Manter o conjunto das atividades escolhidas como compatível.</p>
+
+<h3> Algoritmo: Selecao-Atividades </h3>
+<p> Denotamos z como a última atividade escolhida. </p>
+
+<b> Entrada: </b> n pares (s<sub>i</sub>, t<sub>i</sub>), com s<sub>i</sub> < t<sub>i</sub>, 1 ≤ i ≤ n<br/>
+<b> Saída: </b> A: conjunto de atividades compatíveis (máximo) e k = |A| (número de elementos em A)<br/>
+<ol>
+	<li>Ordenar os pares da entrada, tal que t<sub>1</sub> ≤ t<sub>2</sub> ≤ t<sub>3</sub> ≤ ... t<sub>n</sub></li>
+	<li>A ← {1}</li>
+	<li>k ← 1</li>
+	<li>z ← 1</li>
+	<li>Para i ← 2 até n, faça:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;Se s<sub>i</sub> ≥ t<sub>j</sub>, então:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A ← A ∪ {i}</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;k ← k + 1</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j ← i</li>
+</ol>
+
+
+<h3>Complexidade</h3>
+<p>O passo mais custoso do algoritmo está na linha 1, para realizar a ordenação. O laço da L5-L9 é O(n).<br/>
+Assim, o algoritmo tem a complexidade da ordenação.</p>
+
+<b>Complexidade de Tempo:</b> O(n log n)<br/>
+
+</body>
+<hr/>
+<a href="javascript:history.back()"><img src="../img/back_arrow.png" alt="back_arrow.png">  Voltar</a>

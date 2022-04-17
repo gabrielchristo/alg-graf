@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<title>MAB368, Algoritmos e Grafos - Lista de Algoritmos</title>
+</head>
+<body bgcolor = "33ffca">
+<h1> MAB 368, Algoritmos e Grafos - 2019/2 </h1>
+<hr/>
+<h2> Árvore Geradora Mínima (Kruskal) </h2>
+<h3> Descrição </h3>
+	<p>O algoritmo de Kruskal tem como finalidade determinar uma árvore geradora mínima para um dado grafo ponderado.</p>
+	<p>Uma árvore é um grafo conexo e acíclico.<br/>
+		 Uma árvore geradora mínima de um grafo G é um grafo conexo e acíclico T tal que V(G) = V(T) e o somatório do peso de suas arestas é mínimo.</p>
+	<p><img src="../img/AGMin.png" alt="Árvore Geradore Mínima" border="2"></p>
+	<p>A imagem acima representa um grafo em que, destacada, está a sua árvore geradora mínima.</p>
+
+<h3> A Ideia do Algoritmo </h3>
+<p>Trata-se de um algoritmo guloso, em que:</p>
+
+<p><b>Critério α:</b> Considerar a aresta de menor peso primeiro.</b><br/>
+<b>Propriedade P:</b> Manter o grafo em construção acíclico.</p>
+
+<h3> Algoritmo:  AGMin_Kruskal </h3>
+<b> Entrada: </b> Grafo conexo ponderado G = (V, E), p.E(G) → Q+ <br/>
+<b> Saída: </b> A ⊂ E(G), tal que T(V, A) é AGMínima de G <br/>
+<ol>
+	<li>Ordenar E(G) em ordem não decrescente, ou seja, i < j ↔ p(e<sub>i</sub>) ≤ p(e<sub>j</sub>)
+	<li>A ← ∅</li>
+	<li>Para i ← 1 até m, faça:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;seja e = uv</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;Se (∀ i A ∪ {e<sub>i</sub>}) é acíclico, A ← A ∪ {e<sub>i</sub>}</li>
+</ol>
+
+<h3> Observação: Union-Find </h3>
+<p>Se na linha 5 utilizássemos uma busca com raíz u, detectando se v está no mesmo componente conexo que v, teríamos complexidade O(n+m) para cada aresta, e obtendo no final uma complexidade de O(m²).</p>
+<p> Com a finalidade de diminuir a complexidade do algoritmo, utilizamos a estrutura UNION-FIND.</p>
+<ul>
+	<li><b>SET (u):</b> Cria o conjunto unitário {u} em O(1)</li>
+	<li><b>UNION (x, y) = r</b> Raíz da árvore obtida pela troca de pai de uma das árvores, representando o conjunto união. O(1)</li>
+	<li><b>FIND (x) = r</b> Vértice que é a raíz da árvore que representa o conjunto que contém x. O(log n)</li>
+</ul>
+
+<p>Dessa maneira, o algoritmo pode ser adaptado:</p>
+
+<ol>
+	<li>Ordenar E(G) em ordem não decrescente, ou seja, i < j ↔ p(e<sub>i</sub>) ≤ p(e<sub>j</sub>)
+	<li>Para i ← 1 até m, faça: SET(v<sub>i</sub>)</li>
+	<li>A ← ∅</li>
+	<li>Para i ← 1 até m, faça:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;seja e = uv</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;Se FIND(u) ≠ FIND(v):</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A ← A ∪ {e<sub>i</sub>}</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UNION(FIND(u), FIND(v))</li>
+</ol>
+
+<h3>Complexidade</h3>
+<b>Complexidade de Tempo:</b> O(m log n)<br/><br/>
+
+<h3>Execução de Kruskal</h3>
+<img src="../img/kruskal.png" border="2">
+<p>Imagem retirada de <a href="https://stackoverflow.com/questions/1195872/when-should-i-use-kruskal-as-opposed-to-prim-and-vice-versa">https://stackoverflow.com/questions/1195872/when-should-i-use-kruskal-as-opposed-to-prim-and-vice-versa</a> </p>
+
+</body>
+<hr/>
+<a href="javascript:history.back()"><img src="../img/back_arrow.png" alt="back_arrow.png">  Voltar</a>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<title>MAB368, Algoritmos e Grafos - Lista de Algoritmos</title>
+</head>
+<body bgcolor = "33ffca">
+<h1> MAB 368, Algoritmos e Grafos - 2019/2 </h1>
+<hr/>
+<h2> Busca em Largura (BFS) </h2>
+<h3> Descrição </h3>
+	<p>A busca em largura é uma maneira de buscar no grafo que funciona de maneira semelhante ao escoamento de água.</p>
+
+	<img src="../img/breadth_first_search.gif" border = "2">
+	<figcaption>Imagem retirada de <a href="https://www.codeabbey.com/index/task_view/breadth-first-search">https://www.codeabbey.com/index/task_view/breadth-first-search</a>
+
+	<p>Utilizamos uma Fila Q para guardar os vértices visitados.</p>
+	<p>É possível modificarmos o algoritmo de busca geral em grafos com a finalidade de obter mais informações,
+		tal como a classificação de arestas, útil, por exemplo, determinar se um grafo é bipartido.</p>
+	<p>A Busca em Largura produz uma árvore de busca em largura. Sua análise é interessante para obter informações sobre o grafo.</p>
+
+	<ul>
+		<li><b>F - Fila:</b> utilizada para guardar os vértices marcados.</li>
+		<li><b>L(v) = i (Largura do Vértice v):</b> v é o i-ésimo vértice a entrar (= a sair) de F.</li>
+		<li><b>π(v) = p :</b> Vértice que marca v = pai de v na árvore de busca.</li>
+		<li><b>nivel(v) :</b> Nível do vértice v na árvore de busca.</li>
+	</ul>
+
+
+
+<h3> Classificação de Arestas </h3>
+<p><b>Se nível(u) = nível(v)</b>
+	<ul>
+			<li>π(u) = π(v): uv é aresta irmão</li>
+			<li>π(u) ≠ π(v): uv é aresta primo</li>
+	</ul>
+</p>
+<p><b>Se nível(u) ≠ nível(v)</b>
+	<ul>
+			<li>π(v) = u: uv é aresta de árvore</li>
+			<li>π(v) ≠ u: uv é aresta tio</li>
+	</ul>
+</p>
+
+<h3> Algoritmo: BFS </h3>
+<p><b>Observação:</b> O algoritmo é uma extensão da busca geral em grafos.
+											Em negrito, estão as novas alterações que estamos fazendo com a finalidade de obter novas informações sobre o grafo.<br/>
+											Observe também as adições a VISITE1 e VISITE2.</p>
+</p>
+<b> Entrada: Grafo G = (V, E) conexo e raíz de busca r ∈ V(G) </b><br/>
+<b> Saída: Listagem de todas as arestas de G </b><br/>
+<ol>
+	<li>Para todo v ∈ V(G)\{r}, faça:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;c(v) ← 0</li>
+	<li>c(r) ← 1</li>
+	<li>nível(r) ← 0</li>
+	<li><b>π(r) ← r</b></li>
+	<li>F ← {r}</li>
+	<li>Enquanto F ≠ ∅, faça:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;Seja v ∈ F</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;se existe w ∈ Adj(v) com vw não visitada:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;se c(v) = 0, então:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c(w) ← 1</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;F ← F ∪ {w}</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>VISITE1(vw)</b></li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;senão, <b>VISITE2(vw)</b></li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;senão:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c(v) ← 2</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;F ← F \ {v}</li>
+</ol>
+
+<b>VISITE1:</b> (Visita aresta de árvore)
+<ol>
+	<li>π(w) ← v</li>
+	<li>nível(w) ← nível(v) + 1</li>
+	<li>vw ← Aresta de Árvore</li>
+</ol>
+
+<b>VISITE2:</b> (Visita aresta não de árvore = fronde)
+<ol>
+	<li>se nível(v) = nível(w):</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;se π(v) = π(w), vw ← Aresta Irmão</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;se π(v) = π(w), vw ← Aresta Primo</li>
+	<li>senão, vw = Aresta Tio</li>
+</ol>
+
+
+<h3>Complexidade</h3>
+<b>Complexidade de Espaço:</b> O(n+m) <br/>
+<b>Complexidade de Tempo:</b> O(n+m)<br/><br/>
+
+</body>
+<hr/>
+<a href="javascript:history.back()"><img src="../img/back_arrow.png" alt="back_arrow.png">  Voltar</a>

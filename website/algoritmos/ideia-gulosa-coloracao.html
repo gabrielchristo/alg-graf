@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<title>MAB368, Algoritmos e Grafos - Lista de Algoritmos</title>
+</head>
+<body bgcolor = "33ffca">
+<h1> MAB 368, Algoritmos e Grafos - 2019/2 </h1>
+<hr/>
+<h2> Ideia "Gulosa" para Coloração de Vértices </h2>
+<h3> Descrição </h3>
+	<p>Este algoritmo é uma introdução ao Método Guloso. Vimos anteriormente o Algoritmo de Zykov para determinar o número cromático de um vértice.
+	Tentaremos obter o mesmo resultado através de uma ideia ingênua que aplica o método guloso. Veremos depois que essa ideia não funciona.</p>
+	<p>Com a finalidade de esclarecer os conceitos sobre o método guloso, a definição abaixo foi retirada do livro do Jayme:</p><br/>
+
+	<p align="middle"><i>"Considere o seguinte problema geral. Seja dado um conjunto S. Deseja-se determinar um subconjunto S' ⊆ S tal que:
+	<br/><br/>(i) S' satisfaz uma dada propriedade P, e
+	<br/>(ii) S' é máximo (ou mínimo) em relação a algum critério dado α."</i></p><br/>
+
+	<p> O método guloso constrói um ponto do domínio, um elemento por vez, escolhendo, a cada iteração, um elemento que é melhor em termos de um critério
+	guloso α e tal que os elementos já escolhidos juntos com este novo elemento continue a ser parte de um ponto do domínio (satisfazer à propriedade P). </p>
+
+	<p> É válido observar que, embora um ponto do domínio é sempre encontrado, nem sempre é possível garantir a maximalidade (ou minimalidade) do subconjunto S'
+	correspondente a sua iteração. Veremos que este é o caso, se a nossa intenção for encontrar a menor coloração possível para um dado grafo. </p>
+
+<h3> A Ideia do Algoritmo </h3>
+	<p> No nosso caso, para a coloração de vértices, temos que: </p>
+
+	<p><b>Critério α:</b> A menor cor em {1, 2, ..., n}</b><br/>
+	<b>Propriedade P:</b> Possibilidade de ser atribuida a um dado vértice</p>
+	<ol>
+		<li>Considere os vértices de G em uma ordem {v<sub>1</sub>, v<sub>2</sub>, ..., v<sub>n</sub>}
+		<li>Para i de 1 até n:</li>
+		<li>&nbsp;&nbsp;&nbsp;&nbsp;cor(v<sub>i</sub>) ← a menor cor em {1, 2, ..., n} que pode ser atribuída a v<sub>i</sub>.
+
+	</ol>
+
+<h3> Algoritmo: Coloração Gulosa</h3>
+<b> Entrada: </b> Grafo G(V, E), Ordenação dos vértices W = {v<sub>1</sub>, v<sub>2</sub>, ..., v<sub>n</sub>}<br/>
+<b> Saída: </b> Uma possível coloração para G<br/>
+<b> Observações: </b> Consideramos a cor 0 como uma cor indefinida. C é um vetor que guarda as possíveis cores durante cada iteração<br/>
+<ol>
+	<li>Para todo vértice v em G:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;cor[v] ← 0
+	<li>Para i ← 1 até n:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;Para c ← 0 até n:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C[c] ← c</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;Para todo u em Adj(W[i]): </li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C[cor[u]] ← 0</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;Para c ← 1 até n ou C[u] ≠ 0:</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cor[i] = c</li>
+</ol>
+
+
+<h3>Complexidade</h3>
+<b>Complexidade de Tempo:</b> O(n²)<br/><br/>
+As atribuições das linhas 2, 4, 7 e 9 são O(1). Laços 1-2, 4-5, 8-9 são O(n). Laço 6-7 é aproximadamente O(m). Logo, o laço 3-9 é O(n² + m) = O(n²).
+
+<h3> Execução do Algoritmo </h3>
+<p>Observe que o algoritmo não minimiza a coloração a cada iteração, logo, se a proposta for encontrar o número cromático de um grafo, o algoritmo falha!</p>
+
+<img src="../img/greedy_color.png" border = "2">
+
+<p> No exemplo da esquerda, executamos o algoritmo considerando a ordenação W = {a, b, c, d, e}, já ná da direita, a ordenação é W' = {a, e, b, d, c}</p>
+
+<h3> Observações </h3>
+
+<p> É possível otimizar o algotimo, mantendo uma estrutura que guarda o vértice para uma determinada cor, obtendo complexidade O(n+m). Verificar página 72, do Livro do Jayme (Algoritmo 3.3). </p>
+
+</body>
+<hr/>
+<a href="javascript:history.back()"><img src="../img/back_arrow.png" alt="back_arrow.png">  Voltar</a>
